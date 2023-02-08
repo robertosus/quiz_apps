@@ -9,7 +9,11 @@ class descriptionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(child: Text('data')),
+        body: Center(
+            child: Text(
+          'Description Page',
+          style: TextStyle(fontSize: 20),
+        )),
       ),
     );
   }

@@ -34,13 +34,7 @@ class homePage extends StatelessWidget {
           const SizedBox(height: 30),
           Image.asset('assets/example.png', width: 150),
           const SizedBox(height: 30),
-          const buttonAnswer(answer: 'Button Press'),
-          const SizedBox(height: 30),
-          const buttonAnswer(answer: 'Flat Button'),
-          const SizedBox(height: 30),
-          const buttonAnswer(answer: 'Text Button'),
-          const SizedBox(height: 30),
-          const buttonAnswer(answer: 'Elevated Button'),
+          button()
         ]),
       ),
     );

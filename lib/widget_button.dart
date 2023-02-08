@@ -1,5 +1,3 @@
-// ignore_for_file: implementation_imports
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -7,43 +5,55 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:quiz_apps/description.dart';
 
-class buttonAnswer extends StatefulWidget {
-  final String answer;
-  const buttonAnswer({super.key, required this.answer});
+class button extends StatefulWidget {
+  const button({super.key});
 
   @override
-  State<buttonAnswer> createState() => _buttonAnswerState();
+  State<button> createState() => _buttonState();
 }
 
-class _buttonAnswerState extends State<buttonAnswer> {
-  bool isActive = false;
-  bool wrongAnswer = false;
+class _buttonState extends State<button> {
+  int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: isActive
-                ? (wrongAnswer ? Colors.red : Colors.blue)
-                : Colors.grey,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-            minimumSize:
-                Size(MediaQuery.of(context).size.width - (2 * 24), 50)),
-        onPressed: () {
-          setState(() {
-            isActive = !isActive;
-          });
-          if (wrongAnswer == true) {
-            Timer(Duration(seconds: 1), () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => descriptionPage(),
-                  ));
+    AnswerButton(int index, String answer) {
+      return ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: selectedIndex == index
+                  ? (index == 0 ? Colors.blue : Colors.red)
+                  : Colors.grey,
+              fixedSize:
+                  Size(MediaQuery.of(context).size.width - (2 * 24), 50)),
+          onPressed: () {
+            setState(() {
+              selectedIndex = index;
+              if (index != 0) {
+                Timer(Duration(seconds: 1), () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => descriptionPage(),
+                      ));
+                });
+              }
             });
-          }
-        },
-        child:
-            Text(widget.answer, style: TextStyle(fontWeight: FontWeight.w700)));
+          },
+          child: Text(
+            answer,
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+          ));
+    }
+
+    return Column(
+      children: [
+        AnswerButton(0, 'Flat Button'),
+        SizedBox(height: 30),
+        AnswerButton(1, 'Raised Button'),
+        SizedBox(height: 30),
+        AnswerButton(2, 'Text Button'),
+        SizedBox(height: 30),
+        AnswerButton(3, 'Column'),
+      ],
+    );
   }
 }
