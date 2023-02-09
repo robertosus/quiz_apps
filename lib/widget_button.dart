@@ -4,19 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:quiz_apps/description.dart';
+import 'package:quiz_apps/pages/description_page.dart';
 
-class button extends StatefulWidget {
-  const button({super.key});
+class WidgetButton extends StatefulWidget {
+  const WidgetButton({super.key});
 
   @override
-  State<button> createState() => _buttonState();
+  State<WidgetButton> createState() => _buttonState();
 }
 
-class _buttonState extends State<button> {
+class _buttonState extends State<WidgetButton> {
   int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
-    AnswerButton(int index, String answer) {
+    answerButton(int index, String answer) {
       return ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: selectedIndex == index
@@ -27,16 +28,16 @@ class _buttonState extends State<button> {
           onPressed: () {
             setState(() {
               selectedIndex = index;
-              if (index != 0) {
-                Timer(Duration(seconds: 1), () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => descriptionPage(),
-                      ));
-                });
-              }
             });
+            if (index != 0) {
+              Timer(Duration(seconds: 1), () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DescriptionPage(),
+                    ));
+              });
+            }
           },
           child: Text(
             answer,
@@ -46,13 +47,13 @@ class _buttonState extends State<button> {
 
     return Column(
       children: [
-        AnswerButton(0, 'Flat Button'),
+        answerButton(0, 'Flat Button'),
         SizedBox(height: 30),
-        AnswerButton(1, 'Raised Button'),
+        answerButton(1, 'Raised Button'),
         SizedBox(height: 30),
-        AnswerButton(2, 'Text Button'),
+        answerButton(2, 'Text Button'),
         SizedBox(height: 30),
-        AnswerButton(3, 'Column'),
+        answerButton(3, 'Column'),
       ],
     );
   }
