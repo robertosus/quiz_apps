@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:quiz_apps/pages/home_page.dart';
 
 class DescriptionPage extends StatelessWidget {
   const DescriptionPage({super.key});
@@ -39,7 +40,15 @@ class DescriptionPage extends StatelessWidget {
           SizedBox(height: 24),
           Center(
               child: ElevatedButton(
-                  onPressed: () {}, child: Text('Next Question')))
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                        (route) => false);
+                  },
+                  child: Text('Next Question')))
         ],
       )),
     );
